@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>College Analytics Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    
+    <h2>Register</h2>
+    <form id="registerForm" action="/submit" method="post" enctype="multipart/form-data">
+
+        <!-- Role Selection -->
+        <div class="role-group">
+            <label>Select Role:</label><br><br>
+            <input type="radio" name="role" value="student"> Student
+            <input type="radio" name="role" value="mentor"> Mentor
+        </div>
+
+        <!-- Profile Picture Upload -->
+        <div class="profile-upload">
+            <input type="file" id="profilePicInput" name="profile_pic" accept="image/*" hidden>
+            
+            <div class="profile-preview" id="profilePreview">
+                <span>+</span>
+            </div>
+
+            <p class="upload-text">Upload Profile Picture</p>
+        </div>
+
+        <!-- Name -->
+        <div class="field">
+            <input type="text" id="name" name="f_name" placeholder=" " required>
+            <label>First Name</label>
+        </div>
+
+        <div class="field">
+            <input type="text" id="name" name="l_name" placeholder=" " required>
+            <label>Last Name</label>
+        </div>
+
+        <!-- ID -->
+        <div class="field">
+            <input type="text" id="userId" name="user_id" placeholder=" " required>
+            <label>ID</label>
+        </div>
+
+        <!-- Email -->
+        <div class="field">
+            <input type="email" id="email" name="email" placeholder=" " required>
+            <label>Email</label>
+        </div>
+
+        <!-- Mobile -->
+        <div class="field">
+            <input type="text" id="mobile" name="ph_num" placeholder=" " required>
+            <label>Mobile No</label>
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+            <input type="password" id="password" name="password" placeholder=" " required>
+            <label>Password</label>
+        </div>
+
+        <ul id="passwordRules">
+            <li id="rule1">First letter must be Capital</li>
+            <li id="rule2">Must contain at least one Special Symbol</li>
+            <li id="rule3">Length must be greater than 8 characters</li>
+        </ul>
+
+        <!-- Confirm Password -->
+        <div class="field">
+            <input type="password" id="confirmPassword" placeholder=" " disabled>
+            <label>Re-enter Password</label>
+        </div>
+
+        <p id="passwordMessage"></p>
+
+        <!-- Student Extra Fields -->
+        <div id="studentFields" class="hidden">
+
+            <!-- Student Sem -->
+            <div class="field">
+                <input type="number" id="sem" name="sem" placeholder=" " required>
+                <label for="sem">Semester</label>
+            </div>
+
+            <div class="field">
+                <input type="text" id="section" name="section" placeholder=" " required>
+                <label for="section">Section</label>
+            </div>
+
+            <!-- Mentor Dropdown -->
+            <!-- Mentor Dropdown With Image -->
+        <div class="field">
+            <label>Select Mentor</label>
+
+            <div class="mentor-dropdown" id="mentorDropdownBox">
+
+                <div class="selected-mentor" id="selectedMentor">
+                    Select Mentor
+                </div>
+
+                <div class="mentor-options hidden" id="mentorOptions">
+                    <!-- Mentor options load here -->
+                </div>
+
+            </div>
+
+            <!-- Hidden input to store selected value -->
+             <input type="hidden" id = "mentor" name="mentor">
+            <input type="hidden" id="mentorValue">
+        </div>
+
+        </div>
+
+        <button type="submit">Register</button>
+
+    </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
