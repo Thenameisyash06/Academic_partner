@@ -2,124 +2,141 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>College Analytics Registration</title>
+    <title>College Analytics | Login & Register</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<div class="container">
-    
-    <h2>Register</h2>
-    <form id="registerForm" action="/submit" method="post" enctype="multipart/form-data">
-
-        <!-- Role Selection -->
-        <div class="role-group">
-            <label>Select Role:</label><br><br>
-            <input type="radio" name="role" value="student"> Student
-            <input type="radio" name="role" value="mentor"> Mentor
-        </div>
-
-        <!-- Profile Picture Upload -->
-        <div class="profile-upload">
-            <input type="file" id="profilePicInput" name="profile_pic" accept="image/*" hidden>
-            
-            <div class="profile-preview" id="profilePreview">
-                <span>+</span>
+<div class="flip-card" id="flipCard">
+    <div class="flip-card-inner" id="flipCardInner">
+        
+        <!-- Login Form (Front Card) -->
+        <div class="flip-card-front container">
+            <div style="text-align: center; margin-bottom: 20px; font-size: 2.5rem; color: var(--accent-primary);">
+                <i class="fa-solid fa-graduation-cap"></i>
             </div>
-
-            <p class="upload-text">Upload Profile Picture</p>
-        </div>
-
-        <!-- Name -->
-        <div class="field">
-            <input type="text" id="name" name="f_name" placeholder=" " required>
-            <label>First Name</label>
-        </div>
-
-        <div class="field">
-            <input type="text" id="name" name="l_name" placeholder=" " required>
-            <label>Last Name</label>
-        </div>
-
-        <!-- ID -->
-        <div class="field">
-            <input type="text" id="userId" name="user_id" placeholder=" " required>
-            <label>ID</label>
-        </div>
-
-        <!-- Email -->
-        <div class="field">
-            <input type="email" id="email" name="email" placeholder=" " required>
-            <label>Email</label>
-        </div>
-
-        <!-- Mobile -->
-        <div class="field">
-            <input type="text" id="mobile" name="ph_num" placeholder=" " required>
-            <label>Mobile No</label>
-        </div>
-
-        <!-- Password -->
-        <div class="field">
-            <input type="password" id="password" name="password" placeholder=" " required>
-            <label>Password</label>
-        </div>
-
-        <ul id="passwordRules">
-            <li id="rule1">First letter must be Capital</li>
-            <li id="rule2">Must contain at least one Special Symbol</li>
-            <li id="rule3">Length must be greater than 8 characters</li>
-        </ul>
-
-        <!-- Confirm Password -->
-        <div class="field">
-            <input type="password" id="confirmPassword" placeholder=" " disabled>
-            <label>Re-enter Password</label>
-        </div>
-
-        <p id="passwordMessage"></p>
-
-        <!-- Student Extra Fields -->
-        <div id="studentFields" class="hidden">
-
-            <!-- Student Sem -->
-            <div class="field">
-                <input type="number" id="sem" name="sem" placeholder=" " required>
-                <label for="sem">Semester</label>
+            <h2>Welcome Back</h2>
+            <form id="loginForm" action="/login" method="post">
+                <div class="field">
+                    <input type="text" id="loginId" name="user_id" placeholder=" " required>
+                    <label>Student/Mentor ID</label>
+                </div>
+                <div class="field">
+                    <input type="password" id="loginPassword" name="password" placeholder=" " required>
+                    <label>Password</label>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div class="toggle-text">
+                <p>Don't have an account? <span id="showRegister">Create new account</span></p>
             </div>
+        </div>
 
-            <div class="field">
-                <input type="text" id="section" name="section" placeholder=" " required>
-                <label for="section">Section</label>
-            </div>
-
-            <!-- Mentor Dropdown -->
-            <!-- Mentor Dropdown With Image -->
-        <div class="field">
-            <label>Select Mentor</label>
-
-            <div class="mentor-dropdown" id="mentorDropdownBox">
-
-                <div class="selected-mentor" id="selectedMentor">
-                    Select Mentor
+        <!-- Register Form (Back Card) -->
+        <div class="flip-card-back container">
+            <h2>Create Account</h2>
+            <form id="registerForm" action="/submit" method="post" enctype="multipart/form-data">
+                
+                <!-- Role Selection -->
+                <div class="role-group">
+                    <label>Select Role:</label>
+                    <input type="radio" name="role" value="student"> Student
+                    <input type="radio" name="role" value="mentor"> Mentor
                 </div>
 
-                <div class="mentor-options hidden" id="mentorOptions">
-                    <!-- Mentor options load here -->
+                <!-- Profile Picture Upload -->
+                <div class="profile-upload">
+                    <input type="file" id="profilePicInput" name="profile_pic" accept="image/*" hidden>
+                    <div class="profile-preview" id="profilePreview">
+                        <span><i class="fa-solid fa-camera"></i></span>
+                    </div>
+                    <p class="upload-text">Upload Picture</p>
                 </div>
 
+                <!-- Name -->
+                <div style="display: flex; gap: 10px;">
+                    <div class="field" style="flex:1;">
+                        <input type="text" id="fname" name="f_name" placeholder=" " required>
+                        <label>First Name</label>
+                    </div>
+                    <div class="field" style="flex:1;">
+                        <input type="text" id="lname" name="l_name" placeholder=" " required>
+                        <label>Last Name</label>
+                    </div>
+                </div>
+
+                <!-- ID & Mobile -->
+                <div style="display: flex; gap: 10px;">
+                    <div class="field" style="flex:1;">
+                        <input type="text" id="userId" name="user_id" placeholder=" " required>
+                        <label>ID No.</label>
+                    </div>
+                    <div class="field" style="flex:1;">
+                        <input type="text" id="mobile" name="ph_num" placeholder=" " required>
+                        <label>Mobile No</label>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="field">
+                    <input type="email" id="email" name="email" placeholder=" " required>
+                    <label>Email Address</label>
+                </div>
+
+                <!-- Password -->
+                <div class="field">
+                    <input type="password" id="password" name="password" placeholder=" " required>
+                    <label>Password</label>
+                </div>
+
+                <ul id="passwordRules">
+                    <li id="rule1">First letter must be Capital</li>
+                    <li id="rule2">Must contain at least one Special Symbol</li>
+                    <li id="rule3">Length must be > 8 characters</li>
+                </ul>
+
+                <!-- Confirm Password -->
+                <div class="field">
+                    <input type="password" id="confirmPassword" placeholder=" " disabled>
+                    <label>Re-enter Password</label>
+                </div>
+
+                <p id="passwordMessage"></p>
+
+                <!-- Student Extra Fields -->
+                <div id="studentFields" class="hidden">
+                    <div style="display: flex; gap: 10px;">
+                        <div class="field" style="flex:1;">
+                            <input type="number" id="sem" name="sem" placeholder=" ">
+                            <label for="sem">Semester</label>
+                        </div>
+                        <div class="field" style="flex:1;">
+                            <input type="text" id="section" name="section" placeholder=" ">
+                            <label for="section">Section</label>
+                        </div>
+                    </div>
+
+                    <!-- Mentor Selection Box -->
+                    <div style="margin-bottom: 20px; text-align: left;">
+                        <label style="font-size: 11px; color: var(--accent-primary); display: block; margin-bottom: 6px; margin-left: 10px;">Select Your Mentor</label>
+                        <div class="mentor-list-box" id="mentorOptions">
+                            <!-- Load Mentors -->
+                        </div>
+                        <!-- Hidden inputs -->
+                        <input type="hidden" id="mentor" name="mentor">
+                        <input type="hidden" id="mentorValue">
+                    </div>
+                </div>
+
+                <button type="submit">Create Account</button>
+            </form>
+            <div class="toggle-text">
+                <p>Already have an account? <span id="showLogin">Go to Login Page</span></p>
             </div>
-
-            <!-- Hidden input to store selected value -->
-             <input type="hidden" id = "mentor" name="mentor">
-            <input type="hidden" id="mentorValue">
         </div>
 
-        </div>
-
-        <button type="submit">Register</button>
-
-    </form>
+    </div>
 </div>
 
 <script src="script.js"></script>

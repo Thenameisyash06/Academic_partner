@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | College Analytics</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <i class="fa-solid fa-graduation-cap"></i> ColAnalytics
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fa-solid fa-chart-line"></i> Performance</a></li>
+            <li><a href="#"><i class="fa-solid fa-robot"></i> Career AI</a></li>
+            <li><a href="#"><i class="fa-solid fa-book"></i> Assignments</a></li>
+            <li><a href="#"><i class="fa-solid fa-trophy"></i> Leaderboard</a></li>
+            <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <div class="welcome-text">
+                <h1>Welcome back, Alex! 👋</h1>
+                <p>Here is what's happening with your academic progress today.</p>
+            </div>
+            <div class="user-profile">
+                <!-- Using a generic placeholder image for demo -->
+                <img src="https://i.pravatar.cc/150?img=11" alt="Profile Picture">
+                <div class="user-info">
+                    <strong>Alex Smith</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary);">Semester 4, IT</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            
+            <!-- Data Collection / Overview Section -->
+            <div class="overview-section">
+                <!-- CGPA -->
+                <div class="card stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="stat-details">
+                        <p>Current CGPA</p>
+                        <h3>8.75</h3>
+                    </div>
+                </div>
+                <!-- Attendance -->
+                <div class="card stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-details">
+                        <p>Attendance</p>
+                        <h3>92%</h3>
+                    </div>
+                </div>
+                <!-- Assignments -->
+                <div class="card stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <div class="stat-details">
+                        <p>Tasks Pending</p>
+                        <h3>3</h3>
+                    </div>
+                </div>
+                <!-- Projects -->
+                <div class="card stat-card">
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div class="stat-details">
+                        <p>Projects Done</p>
+                        <h3>12</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Visualization Section -->
+            <div class="card chart-section">
+                <div class="card-header">
+                    <div class="card-title">Performance Analysis (Semester Growth)</div>
+                </div>
+                <div style="position: relative; height:300px; width:100%">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Ranking Section -->
+            <div class="card rank-section">
+                <div class="card-header">
+                    <div class="card-title">Your Rankings</div>
+                </div>
+                
+                <div class="rank-card highlight">
+                    <div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">This Week</div>
+                        <div style="font-size: 1.2rem; font-weight: bold; color: var(--text-primary);">Rank #5</div>
+                    </div>
+                    <div style="color: var(--accent-warning); font-size: 1.5rem;">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
+                </div>
+
+                <div class="rank-card">
+                    <div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Current Semester</div>
+                        <div style="font-size: 1.2rem; font-weight: bold; color: var(--text-primary);">Rank #12</div>
+                    </div>
+                    <div style="color: var(--accent-success); font-size: 1.5rem;">
+                        <i class="fa-solid fa-minus"></i>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-secondary); text-align: center;">
+                    Keep coding and completing assignments to level up! 🚀
+                </div>
+            </div>
+
+            <!-- AI Agent Section -->
+            <div class="card ai-agent-section">
+                <div class="card-header">
+                    <div class="card-title"><i class="fa-solid fa-robot" style="color: var(--accent-secondary);"></i> Career AI Agent</div>
+                </div>
+                <p style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                    Based on your high scores in <strong>Data Structures</strong> and <strong>Web Development</strong>, the AI suggests the following focus areas:
+                </p>
+                
+                <div class="ai-recommendation">
+                    <h4>Option 1: Full-Stack Developer</h4>
+                    <p>Your frontend assignment scores are top 10%. We recommend learning React.js or Next.js to strengthen your profile for full-stack roles.</p>
+                </div>
+
+                <div class="ai-recommendation" style="border-left-color: var(--accent-primary); background: rgba(59, 130, 246, 0.1);">
+                    <h4 style="color: var(--accent-primary);">Option 2: Data Engineer</h4>
+                    <p>You have showed consistent growth in SQL and backend logic. Try exploring Python Data Engineering pipelines as a secondary focus.</p>
+                </div>
+            </div>
+
+            <!-- Tests & Assignments Section -->
+            <div class="card assignments-section">
+                <div class="card-header">
+                    <div class="card-title">Recent Assignments</div>
+                    <a href="#" style="font-size: 0.85rem; color: var(--accent-primary); text-decoration: none;">View All</a>
+                </div>
+                
+                <ul class="assignment-list">
+                    <li class="assignment-item">
+                        <div class="assignment-info">
+                            <h4>Frontend: React Landing Page</h4>
+                            <p>Due: Tomorrow, 11:59 PM</p>
+                        </div>
+                        <span class="status-badge pending">Pending</span>
+                    </li>
+                    <li class="assignment-item">
+                        <div class="assignment-info">
+                            <h4>Backend: Node.js API Authentication</h4>
+                            <p>Due: Next Monday</p>
+                        </div>
+                        <span class="status-badge pending">Pending</span>
+                    </li>
+                    <li class="assignment-item">
+                        <div class="assignment-info">
+                            <h4>SQL Optimization Test</h4>
+                            <p>Submitted: 2 days ago</p>
+                        </div>
+                        <span class="status-badge completed">Completed - 95/100</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

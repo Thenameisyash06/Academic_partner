@@ -14,6 +14,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
 
+    // ---------------- Flip Card Logic ----------------
+    const flipCard = document.getElementById('flipCard');
+    const flipCardInner = document.getElementById('flipCardInner');
+    const showRegisterBtn = document.getElementById('showRegister');
+    const showLoginBtn = document.getElementById('showLogin');
+    const frontCard = document.querySelector('.flip-card-front');
+    const backCard = document.querySelector('.flip-card-back');
+
+    // Global scope update function bound
+    window.updateCardHeight = function() {
+        if (flipCard.classList.contains('flipped')) {
+            flipCardInner.style.height = backCard.offsetHeight + 'px';
+        } else {
+            flipCardInner.style.height = frontCard.offsetHeight + 'px';
+        }
+    }
+
+    // Initialize height
+    setTimeout(updateCardHeight, 100);
+
+    showRegisterBtn.addEventListener('click', () => {
+        flipCard.classList.add('flipped');
+        updateCardHeight();
+    });
+
+    showLoginBtn.addEventListener('click', () => {
+        flipCard.classList.remove('flipped');
+        updateCardHeight();
+    });
+
     // ---------------- Role Toggle ----------------
     roleRadios.forEach(radio => {
         radio.addEventListener("change", function () {
@@ -28,6 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 studentFields.classList.add("hidden");
             }
+            // Vital: update card 3D container height when inner content expands!
+            setTimeout(window.updateCardHeight, 50);
         });
     });
 
@@ -121,24 +153,37 @@ document.addEventListener("DOMContentLoaded", function () {
 // ---------------- Mentor Loader ----------------
 async function loadMentors() {
 
-    // const mentors = [
-    //     { name: "Dr. Sharma", image: "images/1.png" },
-    //     { name: "Prof. Rajput", image: "images/1.png" },
-    //     { name: "Dr. Mehta", image: "images/1.pnd" },
-    //     { name: "Prof. Singh", image: "images/1.png" }
-    // ];
-
-    const res = await fetch('/getMentors')
-    const mentors = await res.json();
-    console.log(mentors);
-        
-
     const mentorOptions = document.getElementById("mentorOptions");
-    const selectedMentor = document.getElementById("selectedMentor");
     const hiddenInput = document.getElementById("mentorValue");
     const assigned_mentor = document.getElementById("mentor");
 
     mentorOptions.innerHTML = "";
+    
+    let mentors = [];
+    
+    try {
+        const res = await fetch('/getMentors');
+        if (res.ok) {
+            mentors = await res.json();
+            console.log("Loaded Mentors:", mentors);
+        } else {
+            console.error("Failed to fetch mentors. Server returned status:", res.status);
+        }
+    } catch (err) {
+        console.error("Network or parsing error while fetching mentors:", err);
+    }
+    
+    if (!mentors || mentors.length === 0) {
+        // Fallback to default mock mentors for testing purposes if DB is empty
+        mentors = [
+            { user_id: "test1", profile_pic: "https://i.pravatar.cc/150?img=12", f_name: "Dr.", l_name: "Sharma" },
+            { user_id: "test2", profile_pic: "https://i.pravatar.cc/150?img=15", f_name: "Prof.", l_name: "Rajput" },
+            { user_id: "test3", profile_pic: "https://i.pravatar.cc/150?img=33", f_name: "Dr.", l_name: "Mehta" },
+            { user_id: "test4", profile_pic: "https://i.pravatar.cc/150?img=47", f_name: "Prof.", l_name: "Singh" },
+            { user_id: "test5", profile_pic: "https://i.pravatar.cc/150?img=59", f_name: "Dr.", l_name: "Aisha" },
+            { user_id: "test6", profile_pic: "https://i.pravatar.cc/150?img=68", f_name: "Prof.", l_name: "Williams" }
+        ];
+    }
 
     mentors.forEach(mentor => {
 
@@ -151,29 +196,20 @@ async function loadMentors() {
         `;
 
         option.addEventListener("click", function() {
+            // Remove 'selected' class from all options
+            document.querySelectorAll(".mentor-option").forEach(el => el.classList.remove("selected"));
+            
+            // Highlight this option
+            option.classList.add("selected");
 
-            selectedMentor.innerHTML = `
-                <img src="${mentor.profile_pic}">
-                ${mentor.f_name+" "+mentor.l_name}
-            `;
-
+            // Fill hidden inputs
             hiddenInput.value = mentor.f_name+" "+mentor.l_name;
             assigned_mentor.value = mentor.user_id;
-            mentorOptions.classList.add("hidden");
         });
 
         mentorOptions.appendChild(option);
     });
+    
+    // Safety check: Update card height after async fetch completes and populates DOM
+    setTimeout(window.updateCardHeight, 50);
 }
-
-const mentorDropdownBox = document.getElementById("mentorDropdownBox");
-const mentorOptions = document.getElementById("mentorOptions");
-
-mentorDropdownBox.addEventListener("click", function(e) {
-    e.stopPropagation();
-    mentorOptions.classList.toggle("hidden");
-});
-
-document.addEventListener("click", function() {
-    mentorOptions.classList.add("hidden");
-});

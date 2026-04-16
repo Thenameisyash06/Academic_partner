@@ -28,6 +28,15 @@ app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
 
+app.get('/student-dashboard',(req,res)=>{
+    res.sendFile(path.join(__dirname, 'public', 'student_dashboard.html'));
+})
+
+app.post('/login', (req, res) => {
+    // Basic mock login that redirects to the dashboard
+    res.redirect('/student-dashboard');
+});
+
 app.get('/employees', async(req,res)=>{
     const query = 'Select * from users;'
     try{
