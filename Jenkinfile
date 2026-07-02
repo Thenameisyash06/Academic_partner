@@ -6,7 +6,11 @@ pipeline{
     }
 
     stages{
+        stage('install'){
+            bat 'npm install'
+        }
         stage('build'){
+            bat 'npm run start'
             echo 'building...'
         }
         stage('test'){
