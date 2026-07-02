@@ -71,6 +71,8 @@ app.get('/getMentors',async(req,res)=>{
     }
 })
 
+console.log("Hiiii");
+
 app.listen(port,()=>{
     console.log("App is running on",port);
 })
